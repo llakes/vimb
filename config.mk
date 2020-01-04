@@ -30,6 +30,10 @@ CPPFLAGS += -DGDK_DISABLE_DEPRECATED
 ifeq "$(findstring $(OS),FreeBSD DragonFly)" ""
 CPPFLAGS += -D_XOPEN_SOURCE=500
 CPPFLAGS += -D__BSD_VISIBLE
+PACKAGES = glib-2.0
+PKGCONFIG = pkg-config
+CPPFLAGS +=  $(shell $(PKGCONFIG) --cflags $(PACKAGES))
+LIBES := $(shell $(PKGCONFIG) --libs $(PACKAGES)) -ldl
 endif
 
 # flags used to build webextension
